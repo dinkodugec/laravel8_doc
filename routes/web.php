@@ -36,3 +36,11 @@ Route::get('/posts/{id}', function ($id) {
 Route::get('/recent-posts/{days_ago?}' , function($daysAgo=20){
     return 'Posts from ' . $daysAgo . ' days ago';
 })->name('posts.recent.index');
+
+Route::get('/', function () { 
+    return view('home.index', []);  //home is template namein views folder, dot(.) means that there is nested folder structure, and index is file...optional there is a array which can acces data
+})->name('home.index');
+
+Route::get('/contact' , function(){
+   return view('home.contact');
+})->name('home.contact');
