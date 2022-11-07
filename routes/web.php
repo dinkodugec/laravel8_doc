@@ -45,9 +45,6 @@ Route::get('/contact' , function(){
    return view('home.contact');
 })->name('home.contact');
 
-
-Route::get('/posts/{id}', function ($id) {  
-
 $posts = 
     [
         1 => [
@@ -63,7 +60,25 @@ $posts =
     ]
     ];
 
-    return view('posts.show', ['post' => $posts[$id]]);
+
+Route::get('/posts/{id}', function ($id) use($posts) {  
+
+/* $posts = 
+    [
+        1 => [
+            'title' => 'Intro to Laravel',
+            'content' => 'This is a short intro to Laravel',
+            'is_new' => true
+        ],
+        2 => [
+            'title' => 'Intro to PHP',
+            'content' => 'This is a short intro to PHP',
+            'is_new' => false,
+            'has_comments' => true
+    ]
+    ]; */
+
+    return view('posts.show', ['post' => $posts[$id]]); 
 
     abort_if(!isset($posts['id']), 404);
 
@@ -71,3 +86,9 @@ $posts =
 
 Route::view('/', 'home.index');  //simple rendering from view/home folder file name index
 Route::view('/contact', 'home.contant');
+
+Route::get('/posts', function() use($posts){
+   /*  compact($posts) === ['posts' => $posts]; */
+    return view('posts.index', ['posts' => $posts]);
+
+});
