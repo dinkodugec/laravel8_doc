@@ -52,11 +52,14 @@ $posts =
     [
         1 => [
             'title' => 'Intro to Laravel',
-            'content' => 'This is a short intro to Laravel'
+            'content' => 'This is a short intro to Laravel',
+            'is_new' => true
         ],
         2 => [
             'title' => 'Intro to PHP',
-            'content' => 'This is a short intro to PHP'
+            'content' => 'This is a short intro to PHP',
+            'is_new' => false,
+            'has_comments' => true
     ]
     ];
 
@@ -65,3 +68,6 @@ $posts =
     abort_if(!isset($posts['id']), 404);
 
 })->name('posts.show');
+
+Route::view('/', 'home.index');  //simple rendering from view/home folder file name index
+Route::view('/contact', 'home.contant');
