@@ -122,3 +122,39 @@ Route::get('/fun/back', function(){
  Route::get('/fun/download', function() use($posts){
     return response()->download(public_path('/mvc.jpg'), 'face.jpg');  /*  download file */
  });
+
+ Route::prefix('fun')->name('fun.')->group(function() use($posts){
+
+
+
+    Route::get('/fun/response', function() use($posts) {
+        return response($posts, 201)
+        ->header('Content-type', 'application/json')
+        ->cookie('MY_COOKIE', 'dinko', 3600); /* show response for user */
+   });
+
+   Route::get('/fun/redirect', function(){
+      return redirect('/content');
+   });
+
+   Route::get('/fun/back', function(){
+       return back();
+    });
+
+    Route::get('/fun/named-route', function(){
+       return redirect()->route('posts-show', ['id' => 1]);
+    });
+
+    Route::get('/fun/away', function(){
+       return redirect()->away('google.com');
+    });
+
+
+    Route::get('/fun/JSON', function() use($posts){
+       return response()->json($posts);
+    });
+
+    Route::get('/fun/download', function() use($posts){
+       return response()->download(public_path('/mvc.jpg'), 'face.jpg');  /*  download file */
+    });
+ });
