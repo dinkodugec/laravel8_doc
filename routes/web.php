@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,8 +85,8 @@ Route::get('/posts/{id}', function ($id) use($posts) {
 
 })->name('posts.show');
 
-Route::view('/', 'home.index');  //simple rendering from view/home folder file name index
-Route::view('/contact', 'home.contant');
+Route::get('/',[ HomeController::class, 'home' ])->name('home.index');
+Route::get('/contact',[ HomeController::class, 'contact' ])->name('home.contact');
 
 Route::get('/posts', function() use($posts){
    /*  compact($posts) === ['posts' => $posts]; */
@@ -99,7 +100,7 @@ Route::get('/fun/response', function() use($posts) {
 });
 
 Route::get('/fun/redirect', function(){
-   return redirect('/content');
+   return redirect('/content')->middleware('auth'); /* in kernel.php there are aliases, 'auth' etc */
 });
 
 Route::get('/fun/back', function(){
