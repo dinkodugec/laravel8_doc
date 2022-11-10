@@ -26,7 +26,7 @@ Route::get('/contact', function () {  //function() is anonymus function, often t
      */
 })->name('home.contact');
 
-Route::get('/posts/{id}', function ($id) {  
+Route::get('/posts/{id}', function ($id) {
     return 'Blog post' . $id;
 })/* ->where([
     'id'=> '[0-9] +'
@@ -37,7 +37,7 @@ Route::get('/recent-posts/{days_ago?}' , function($daysAgo=20){
     return 'Posts from ' . $daysAgo . ' days ago';
 })->name('posts.recent.index');
 
-Route::get('/', function () { 
+Route::get('/', function () {
     return view('home.index', []);  //home is template namein views folder, dot(.) means that there is nested folder structure, and index is file...optional there is a array which can acces data
 })->name('home.index');
 
@@ -45,7 +45,7 @@ Route::get('/contact' , function(){
    return view('home.contact');
 })->name('home.contact');
 
-$posts = 
+$posts =
     [
         1 => [
             'title' => 'Intro to Laravel',
@@ -61,9 +61,9 @@ $posts =
     ];
 
 
-Route::get('/posts/{id}', function ($id) use($posts) {  
+Route::get('/posts/{id}', function ($id) use($posts) {
 
-/* $posts = 
+ $posts =
     [
         1 => [
             'title' => 'Intro to Laravel',
@@ -76,9 +76,9 @@ Route::get('/posts/{id}', function ($id) use($posts) {
             'is_new' => false,
             'has_comments' => true
     ]
-    ]; */
+    ];
 
-    return view('posts.show', ['post' => $posts[$id]]); 
+    return view('posts.show', ['post' => $posts[$id]]);
 
     abort_if(!isset($posts['id']), 404);
 
@@ -90,5 +90,35 @@ Route::view('/contact', 'home.contant');
 Route::get('/posts', function() use($posts){
    /*  compact($posts) === ['posts' => $posts]; */
     return view('posts.index', ['posts' => $posts]);
-
 });
+
+Route::get('/fun/response', function() use($posts) {
+     return response($posts, 201)
+     ->header('Content-type', 'application/json')
+     ->cookie('MY_COOKIE', 'dinko', 3600); /* show response for user */
+});
+
+Route::get('/fun/redirect', function(){
+   return redirect('/content');
+});
+
+Route::get('/fun/back', function(){
+    return back();
+ });
+
+ Route::get('/fun/named-route', function(){
+    return redirect()->route('posts-show', ['id' => 1]);
+ });
+
+ Route::get('/fun/away', function(){
+    return redirect()->away('google.com');
+ });
+
+
+ Route::get('/fun/JSON', function() use($posts){
+    return response()->json($posts);
+ });
+
+ Route::get('/fun/download', function() use($posts){
+    return response()->download(public_path('/mvc.jpg'), 'face.jpg');  /*  download file */
+ });
