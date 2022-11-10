@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,6 +88,12 @@ Route::get('/posts/{id}', function ($id) use($posts) {
 
 Route::get('/',[ HomeController::class, 'home' ])->name('home.index');
 Route::get('/contact',[ HomeController::class, 'contact' ])->name('home.contact');
+
+Route::get('/single',[ AboutController::class, 'home' ]);
+
+
+
+
 
 Route::get('/posts', function() use($posts){
    /*  compact($posts) === ['posts' => $posts]; */
