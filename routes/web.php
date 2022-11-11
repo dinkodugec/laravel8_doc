@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,12 +29,7 @@ Route::get('/contact', function () {  //function() is anonymus function, often t
      */
 })->name('home.contact');
 
-Route::get('/posts/{id}', function ($id) {
-    return 'Blog post' . $id;
-})/* ->where([
-    'id'=> '[0-9] +'
-]) */
-->name('posts.show');
+Route::resource('posts', PostController::class)->only('index', 'show');  /* ->except(['index', 'show']) */
 
 Route::get('/recent-posts/{days_ago?}' , function($daysAgo=20){
     return 'Posts from ' . $daysAgo . ' days ago';
@@ -95,10 +91,6 @@ Route::get('/single',[ AboutController::class, 'home' ]);
 
 
 
-Route::get('/posts', function() use($posts){
-   /*  compact($posts) === ['posts' => $posts]; */
-    return view('posts.index', ['posts' => $posts]);
-});
 
 Route::get('/fun/response', function() use($posts) {
      return response($posts, 201)
