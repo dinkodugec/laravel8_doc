@@ -61,7 +61,7 @@ class PostController extends Controller
     {
       /*  abort_if((!isset($this->posts['id'])), 404); */
 
-       return view('posts.show',  ['posts' => BlogPosts::findOrFail()]);
+       return view('posts.show',  ['posts' => BlogPosts::findOrFail($id)]);
     }
 
     /**
@@ -98,3 +98,4 @@ class PostController extends Controller
         //
     }
 }
+

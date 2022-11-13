@@ -58,7 +58,7 @@ $posts =
     ]
     ];
 
-
+/*
 Route::get('/posts/{id}', function ($id) use($posts) {
 
  $posts =
@@ -80,7 +80,7 @@ Route::get('/posts/{id}', function ($id) use($posts) {
 
     abort_if(!isset($posts['id']), 404);
 
-})->name('posts.show');
+})->name('posts.show'); */
 
 Route::get('/',[ HomeController::class, 'home' ])->name('home.index');
 Route::get('/contact',[ HomeController::class, 'contact' ])->name('home.contact');
