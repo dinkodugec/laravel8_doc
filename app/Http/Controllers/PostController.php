@@ -3,24 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\BlogPosts;
 
 class PostController extends Controller
 {
 
-    private $posts =
-    [
-        1 => [
-            'title' => 'Intro to Laravel',
-            'content' => 'This is a short intro to Laravel',
-            'is_new' => true
-        ],
-        2 => [
-            'title' => 'Intro to PHP',
-            'content' => 'This is a short intro to PHP',
-            'is_new' => false,
-            'has_comments' => true
-    ]
-    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index', ['posts' => $this->posts]);
+        return view('posts.index', ['posts' => BlogPosts::all()]);
     }
 
     /**
@@ -38,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -49,8 +37,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        /* dd($request); */
+        $request->validate([
+        'title' => 'bail|required|min:5|max:100',
+        'content' => 'required|min:10'
+
+    ]);
+        $post = new BlogPosts();
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post ->save();
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
+        }
 
     /**
      * Display the specified resource.
@@ -60,9 +59,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-       abort_if((!isset($this->posts['id'])), 404);
+      /*  abort_if((!isset($this->posts['id'])), 404); */
 
-       return view('posts.show',  ['posts' => $this->posts]);
+       return view('posts.show',  ['posts' => BlogPosts::findOrFail()]);
     }
 
     /**
