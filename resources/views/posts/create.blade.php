@@ -8,11 +8,11 @@
 
 <form action="{{ route('posts.store') }}" method="POST">{{-- route is helper function --}}
 @csrf
-<div><input type="text" name="title"></div>
+<div><input type="text" name="title" value="{{ old('title') }}"></div>
 @error('title')
    <div>{{ $message }}</div>
 @enderror
-<div><textarea name="content" id="" cols="30" rows="10"></textarea></div>
+<div><textarea name="content" value="{{ old('content') }}" id="" cols="30" rows="10"></textarea></div>
 @if ($errors->any())
     <div>
         <ul>
