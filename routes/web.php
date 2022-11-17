@@ -29,7 +29,7 @@ Route::get('/contact', function () {  //function() is anonymus function, often t
      */
 })->name('home.contact');
 
-Route::resource('posts', PostController::class)->only(['index', 'show', 'create', 'store']);  /* ->except(['index', 'show']) */
+Route::resource('posts', PostController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update']);  /* ->except(['index', 'show']) */
 
 Route::get('/recent-posts/{days_ago?}' , function($daysAgo=20){
     return 'Posts from ' . $daysAgo . ' days ago';
