@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePost;
 use Illuminate\Http\Request;
 use App\Models\BlogPosts;
+use Illuminate\Container\RewindableGenerator;
 
 class PostController extends Controller
 {
@@ -104,8 +105,12 @@ class PostController extends Controller
     public function destroy($id)
     {
 
-     dd($id);
+     $post = BlogPosts::findOrFail($id);
+     $post->delete();
 
+     session()->flash('status', 'Blog post was deleted!');
+
+     return redirect()->route('posts.index');
 
     }
 }
