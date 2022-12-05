@@ -22,6 +22,10 @@ Route::get('/', function () {  //function() is anonymus function, often this is 
      */
 })->name('home.index');
 
+Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
+    //
+});
+
 
 Route::get('/contact', function () {  //function() is anonymus function, often this is controller
     return 'contact';
