@@ -6,6 +6,7 @@ use App\Http\Requests\StorePost;
 use Illuminate\Http\Request;
 use App\Models\BlogPosts;
 use Illuminate\Container\RewindableGenerator;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -102,13 +103,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
 
      $post = BlogPosts::findOrFail($id);
      $post->delete();
 
-     session()->flash('status', 'Blog post was deleted!');
+     $request->session()->flash('status', 'Blog post was deleted!');
 
      return redirect()->route('posts.index');
 

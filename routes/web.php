@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Auth::routes();
 
 Route::get('/', function () {  //function() is anonymus function, often this is controller
     return view('welcome');
@@ -90,6 +93,8 @@ Route::get('/',[ HomeController::class, 'home' ])->name('home.index');
 Route::get('/contact',[ HomeController::class, 'contact' ])->name('home.contact');
 
 Route::get('/single',[ AboutController::class, 'home' ]);
+
+Route::resource('/posts', PostController::class);
 
 
 

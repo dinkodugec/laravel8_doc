@@ -6,9 +6,13 @@
 
 
 <div>
-    <form action="{{ route('posts.destroy'), ['post' => $post->id] }}" method="post">
+
+
+
+    <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="post">
      @csrf
      @method('DELETE')
      <input type="submit" value="delete">
     </form>
+
 </div>
