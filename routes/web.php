@@ -19,7 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@home')->name('home');
+Route::get('/', 'HomeController@home')
+->name('home')
+/* ->middleware('auth') */
+;
 
 /* Route::get('/', function () {
     return view('welcome');
@@ -45,7 +48,9 @@ Route::get('/recent-posts/{days_ago?}' , function($daysAgo=20){
 
 Route::get('/', function () {
     return view('home.index', []);  //home is template namein views folder, dot(.) means that there is nested folder structure, and index is file...optional there is a array which can acces data
-})->name('home.index');
+})
+->name('home.index')
+/* ->middleware('auth') */; //add a middleware auth, protect route only for auth user
 
 Route::get('/contact' , function(){
    return view('home.contact');
@@ -90,7 +95,7 @@ Route::get('/posts/{id}', function ($id) use($posts) {
 
 })->name('posts.show'); */
 
-Route::get('/',[ HomeController::class, 'home' ])->name('home.index');
+/* Route::get('/',[ HomeController::class, 'home' ])->name('home.index')->middleware('auth'); */
 Route::get('/contact',[ HomeController::class, 'contact' ])->name('home.contact');
 
 Route::get('/single',[ AboutController::class, 'home' ]);
