@@ -19,11 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {  //function() is anonymus function, often this is controller
+Route::get('/', 'HomeController@home')->name('home');
+
+/* Route::get('/', function () {
     return view('welcome');
-    /* return 'Home page'; string hrmr psgr in browser
-     */
-})->name('home.index');
+
+})->name('home.index'); */
 
 Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
     //
