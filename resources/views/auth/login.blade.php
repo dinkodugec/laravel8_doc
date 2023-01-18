@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('content')
+
+<div class="container">
   <form method="POST" action="{{ route('login') }}">
     @csrf
+
 
     <div class="form-group">
       <label>E-mail</label>
@@ -40,4 +43,5 @@
 
     <button type="submit" class="btn btn-primary btn-block">Login!</button>
   </form>
+</div>
 @endsection('content')

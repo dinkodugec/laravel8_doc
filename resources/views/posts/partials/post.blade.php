@@ -1,8 +1,21 @@
-@if($loop->even)
+
+
+
+{{-- @if($loop->even)
 <div>{{ $key}} . {{ $post->title }}</div>
 @else
 <div style="background-color: silver">{{ $key}} . {{ $post->title }}</div>
-@endif
+@endif --}}
+
+@foreach ($posts as $post )
+
+        <p>
+            <h3>
+                <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
+            </h3>
+        </p>
+
+@endforeach
 
 
 <div>
