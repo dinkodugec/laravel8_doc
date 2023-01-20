@@ -36,6 +36,8 @@
     @endif
 
     @yield('content')
+
+    This is test
 </div>
 
 <script src="{{ mix('js/app.js') }}"></script>
