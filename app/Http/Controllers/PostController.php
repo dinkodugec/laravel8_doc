@@ -6,7 +6,8 @@ use App\Http\Requests\StorePost;
 use Illuminate\Http\Request;
 use App\Models\BlogPosts;
 use Illuminate\Container\RewindableGenerator;
-use Illuminate\Support\Facades\DB;
+/* use Illuminate\Support\Facades\DB;
+ */
 
 class PostController extends Controller
 {
@@ -25,6 +26,20 @@ class PostController extends Controller
      */
     public function index()
     {
+     /*    DB::enableQueryLog();
+
+          $posts = BlogPosts::with('comments')->get();
+
+        foreach ($posts as $post) {
+           foreach ($post->comments as $comment) {
+                echo $comment->content;
+             }
+         }
+
+        dd(DB::getQueryLog()); */
+
+
+
         return view('posts.index', ['posts' => BlogPosts::all()]);
     }
 
