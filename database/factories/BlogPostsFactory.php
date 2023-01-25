@@ -22,6 +22,7 @@ class BlogPostsFactory extends Factory
             'title' => $this->faker->title,
             'content' => $this->faker->text,
 
+
         ];
     }
 }

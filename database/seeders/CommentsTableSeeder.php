@@ -1,0 +1,26 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\BlogPosts;
+use App\Models\Comment;
+use Illuminate\Database\Seeder;
+
+class CommentsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        $posts = BlogPosts::all();
+
+        Comment::factory(50)->make()->each(function ($comment) use ($posts) {
+            $comment->blog_posts_id = $posts->random()->id;
+            $comment->save();
+        });
+    }
+}
