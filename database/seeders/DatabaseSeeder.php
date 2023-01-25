@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\BlogPosts;
+use App\Models\Comment;
 use App\Models\User;
 use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,13 +29,26 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]); this is random bx new Laravel APP */
 
-      User::factory()->defaultUser()->create();
+       $dinko = User::factory()->defaultUser()->create();
 
-        User::factory(20)->create();
+        $else = User::factory(20)->create();
 
-        BlogPosts::factory(20)->create();
+        $posts = BlogPosts::factory(20)->create();
+
+      $users = $else->concat([$dinko]);
 
 
+
+      BlogPosts::factory(50)->make()->each(function($post) use($users) {
+        $post->user_id = $users->random()->id;
+         $post->save();
+      
+    });
+
+       Comment::factory(50)->make()->each(function ($comment) use ($posts) {
+        $comment->blog_posts_id = $posts->random()->id;
+        $comment->save();
+    });
     }
 
 
