@@ -28,9 +28,11 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]); this is random bx new Laravel APP */
 
-       User::factory()->defaultUser()->create();
+      User::factory()->defaultUser()->create();
 
-       User::factory(20)->create();
+        User::factory(20)->create();
+
+        BlogPosts::factory(20)->create();
 
 
     }
