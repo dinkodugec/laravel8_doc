@@ -99,7 +99,7 @@ class PostController extends Controller
 
         $post = BlogPosts::findOrFail($id);
 
-        
+
         if(Gate::denies('update-post', $post)) {
             abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
         }
@@ -117,9 +117,11 @@ class PostController extends Controller
     {
         $post = BlogPosts::findOrFail($id);
 
-        if(Gate::denies('update-post', $post)) {
+       /*  if(Gate::denies('update-post', $post)) {
             abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
-        }
+        } */
+
+        $this->authorize('update-post', $post);
 
         $validated = $request->validated();
         $post->fill($validated);
@@ -141,6 +143,13 @@ class PostController extends Controller
     {
 
      $post = BlogPosts::findOrFail($id);
+
+
+   /*   if(Gate::denies('delete-post', $post)) {
+         abort(403, "you can not delete this blog posts"); //redirect to specific page with specific message
+     } */
+
+     $this->authorize('delete-post', $post);
      $post->delete();
 
      $request->session()->flash('status', 'Blog post was deleted!');
