@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePost;
 use Illuminate\Http\Request;
 use App\Models\BlogPosts;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Container\RewindableGenerator;
 /* use Illuminate\Support\Facades\DB;
  */
@@ -95,6 +96,13 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+
+        $post = BlogPosts::findOrFail($id);
+
+        
+        if(Gate::denies('update-post', $post)) {
+            abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
+        }
        return view('posts.edit', ['posts' => BlogPosts::findOrFail($id)]);
     }
 
@@ -108,6 +116,11 @@ class PostController extends Controller
     public function update(StorePost $request, $id)
     {
         $post = BlogPosts::findOrFail($id);
+
+        if(Gate::denies('update-post', $post)) {
+            abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
+        }
+
         $validated = $request->validated();
         $post->fill($validated);
         $post->save();

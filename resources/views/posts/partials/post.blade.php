@@ -14,6 +14,9 @@
                 <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
             </h3>
         </p>
+        <p class="">Added({{ $post->created_at->diffForHumans() }})
+            by {{ $post->user->name }}
+            </p>
 
 @endforeach
 
