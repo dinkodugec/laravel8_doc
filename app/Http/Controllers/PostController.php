@@ -51,6 +51,7 @@ class PostController extends Controller
      */
     public function create()
     {
+         /*  $this->authorize('posts.create'); */
         return view('posts.create');
     }
 
@@ -99,6 +100,7 @@ class PostController extends Controller
 
         $post = BlogPosts::findOrFail($id);
 
+        $this->authorize('posts.update', $post);
 
         if(Gate::denies('update-post', $post)) {
             abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
@@ -121,7 +123,7 @@ class PostController extends Controller
             abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
         } */
 
-        $this->authorize('update-post', $post);
+        $this->authorize('posts.update', $post);
 
         $validated = $request->validated();
         $post->fill($validated);
@@ -149,7 +151,7 @@ class PostController extends Controller
          abort(403, "you can not delete this blog posts"); //redirect to specific page with specific message
      } */
 
-     $this->authorize('delete-post', $post);
+     $this->authorize('posts.delete', $post);
      $post->delete();
 
      $request->session()->flash('status', 'Blog post was deleted!');
