@@ -23,12 +23,16 @@
 
 <div>
 
+  {{--   @cannot()
+     <p>You can not delete that post</p>
+    @endcannot --}}
 
-
+     @can('update', $post)
     <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="post">
      @csrf
      @method('DELETE')
      <input type="submit" value="delete">
     </form>
+    @endcan
 
 </div>
