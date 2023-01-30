@@ -13,7 +13,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\BlogPosts' => 'App\Policies\BlogPostsPolicy',
     ];
 
     /**
@@ -37,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         // Gate::define('posts.update', 'App\Policies\BlogPostsPolicy@update');
         // Gate::define('posts.delete', 'App\Policies\BlogPostsPolicy@delete');
 
-        Gate::resource('posts', 'App\Policies\BlogPostsPolicy');
+       /*  Gate::resource('posts', 'App\Policies\BlogPostsPolicy'); */
         // posts.create, posts.view, posts.update, posts.delete
 
 
