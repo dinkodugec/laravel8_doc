@@ -42,6 +42,10 @@ Route::get('/contact', function () {  //function() is anonymus function, often t
 
 Route::resource('posts', PostController::class);/* ->only(['index', 'show', 'create', 'store', 'edit', 'update']); */  /* ->except(['index', 'show']) */
 
+Route::get('/secret', 'HomeController@secret')
+  ->name('secret')
+  ->middleware('can:home.secret'); //protect URL with middleware method, can middleware, name of ability, home.secret
+
 Route::get('/recent-posts/{days_ago?}' , function($daysAgo=20){
     return 'Posts from ' . $daysAgo . ' days ago';
 })->name('posts.recent.index');
