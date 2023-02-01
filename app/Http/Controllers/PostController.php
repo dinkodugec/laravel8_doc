@@ -74,6 +74,7 @@ class PostController extends Controller
     {
         /* dd($request); */
         $validated = $request->validated();
+        $validatedData['user_id'] = $request->user()->id;
      /*    $post = new BlogPosts();
         $post->title = $validated['title'];
         $post->content = $validated['content'];

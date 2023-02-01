@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlogPosts extends Model
 {
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['title', 'content', 'user_id'];
 
     use HasFactory;
 
@@ -29,7 +29,7 @@ class BlogPosts extends Model
             $blogPosts->comments()->delete(); //delete blogposts model and related comments from database
         });
 
-        static::restoring(function (BlogPosts $blogPosts) {   //restore 
+        static::restoring(function (BlogPosts $blogPosts) {   //restore
             $blogPosts->comments()->restore();
         });
     }
