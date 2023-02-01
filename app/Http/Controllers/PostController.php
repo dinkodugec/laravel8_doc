@@ -50,7 +50,7 @@ class PostController extends Controller
 
 
 
-        return view('posts.index', ['posts' => BlogPosts::all()]);
+        return view('posts.index', ['posts' => BlogPosts::withCount('comments')->get()]);
     }
 
     /**
