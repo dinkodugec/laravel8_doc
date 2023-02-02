@@ -7,32 +7,56 @@
 <div style="background-color: silver">{{ $key}} . {{ $post->title }}</div>
 @endif --}}
 
-@foreach ($posts as $post )
+<div class="row">
+    <div class="col-8">
+        @foreach ($posts as $post )
 
-        <p>
-            <h3>
-                <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
-            </h3>
-        </p>
-        <p class="">Added({{ $post->created_at->diffForHumans() }})
-            by {{ $post->user->name }}
-            </p>
-
-@endforeach
+                <p>
+                    <h3>
+                        <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
+                    </h3>
+                </p>
+                <p class="">Added({{ $post->created_at->diffForHumans() }})
+                    by {{ $post->user->name }}
+                    </p>
 
 
-<div>
 
-  {{--   @cannot()
-     <p>You can not delete that post</p>
-    @endcannot --}}
 
-     @can('update', $post)
-    <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="post">
-     @csrf
-     @method('DELETE')
-     <input type="submit" value="delete">
-    </form>
-    @endcan
+        <div>
 
+        {{--   @cannot()
+            <p>You can not delete that post</p>
+            @endcannot --}}
+
+            @can('update', $post)
+            <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="delete">
+            </form>
+            @endcan
+
+        </div>
+        @endforeach
+    </div>
+    <div class="col-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Most Commented</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    What people are currently talking about
+                </h6>
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach ($mostCommented as $post)
+                    <li class="list-group-item">
+                        <a href="{{ route('posts.show', ['post' => $post->id]) }}">
+                            {{ $post->title }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
 </div>
