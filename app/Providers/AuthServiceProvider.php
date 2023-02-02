@@ -46,11 +46,11 @@ class AuthServiceProvider extends ServiceProvider
         // posts.create, posts.view, posts.update, posts.delete
 
 
-  /*   Gate::before(function ($user, $ability) { //it is called before Gates upthere...by default $user is authenticeted user
+    Gate::before(function ($user, $ability) { //it is called before Gates upthere...by default $user is authenticeted user
         if ($user->is_admin && in_array($ability, ['delete'])) {  //ability to admin user can delete a post
             return true;
         }
-    }); */
+    }); 
 
       // Gate::after(function ($user, $ability, $result) {
         //     if ($user->is_admin) {
