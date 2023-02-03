@@ -13,10 +13,16 @@
 
 @unless($posts['is_new'])
 <div>It is an old post using unless</div>
+@component('badge', ['type' => 'primary'])
+Old Post!
+@endcomponent
 @endunless()
 
 @isset($posts['has_comments'])
 <div>The post has some comments....using isser</div>
+@component('badge', ['type' => 'primary'])
+Brand new Post!
+@endcomponent
 @endisset
 
 

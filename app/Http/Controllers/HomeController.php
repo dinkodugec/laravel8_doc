@@ -9,9 +9,9 @@ class HomeController extends Controller
 {
     public function home()
     {
-          // dd(Auth::check());
+          // dd(Auth::check()) ;
         // dd(Auth::id());
-        // dd(Auth::user());
+        // dd(Auth::user() get current user Auth::user()->is_admin) is cuurent user is admin;
         return view('home.index');
     }
 
