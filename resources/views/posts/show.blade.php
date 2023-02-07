@@ -5,11 +5,12 @@
 
 @section('content')
 
-@if($posts['is_new'])
-<div>A new blog post! Using If!</div>
-@else
-<div>Blog post is old</div>
-@endif
+<h1>
+  {{ $post->title }}
+  @badge(['show' => now()->diffInMinutes($post->created_at) < 30])
+      Brand new Post!
+  @endbadg
+</h1>
 
 @unless($posts['is_new'])
 <div>It is an old post using unless</div>
@@ -18,12 +19,12 @@ Old Post!
 @endbadge
 @endunless()
 
-@isset($posts['has_comments'])
+{{-- @isset($posts['has_comments'])
 <div>The post has some comments....using isser</div>
 @badge
 Brand new Post!
 @endbadge
-@endisset
+@endisset --}}
 
 
 

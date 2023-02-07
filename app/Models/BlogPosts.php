@@ -23,6 +23,11 @@ class BlogPosts extends Model
         return $this->hasMany(Comment::class)->latest();
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
 
 
     public function scopeLatest(Builder $query)
