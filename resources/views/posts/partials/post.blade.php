@@ -33,6 +33,10 @@
 
         <div>
 
+            <div>
+                @tags(['tags'=>$post->tags])@endtags  {{-- component named tags- this is way to show list of tags --}}
+            </div>
+
         {{--   @cannot()
             <p>You can not delete that post</p>
             @endcannot --}}

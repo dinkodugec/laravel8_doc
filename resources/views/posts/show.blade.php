@@ -12,6 +12,8 @@
   @endbadg
 </h1>
 
+@tags(['tags'=>$post->tags])@endtags 
+
 @unless($posts['is_new'])
 <div>It is an old post using unless</div>
 @badge

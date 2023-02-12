@@ -51,7 +51,7 @@ class PostController extends Controller
 
 
 
-        return view('posts.index', ['posts' => BlogPosts::latest()->withCount('comments')->get(),
+        return view('posts.index', ['posts' => BlogPosts::latest()->withCount('comments')->get()->with('users')->with('tags')->get(), //eager loading
         'mostCommented' => BlogPosts::mostCommented()->take(5)->get(),
         'mostActive' => User::withMostBlogPosts()->take(5)->get(),
         'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
@@ -107,7 +107,7 @@ class PostController extends Controller
         //     }])->findOrFail($id),
         // ]);
         return view('posts.show', [
-            'post' => BlogPosts::with('comments')->findOrFail($id),
+            'post' => BlogPosts::with('comments')->with('tags')->with('tags')->findOrFail($id), //eager loading
         ]);
     }
 
