@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form action="{{ route('posts.store') }}" method="POST">{{-- route is helper function --}}
+<form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
 
 @include('posts.partials.form');

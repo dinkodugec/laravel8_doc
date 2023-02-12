@@ -12,5 +12,8 @@
             </ul>
         </div>
     @endif
-    <div><input type="submit" value="Create"></div>
+    <div class="form-group">
+        <label for="">Thumbnail</label>
+        <input type="file" class="form-control-file" name="thumbnail" value="">
+    </div>
     </div>
