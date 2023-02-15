@@ -99,8 +99,11 @@ class PostController extends Controller
            /*  dump($file->store('thumbails'));
             dump(Storage::disk('public')->putFile('thumbails', $file)); */
 
-            dump($file->storeAs('thumbails', $post->id . '.'. $file->guessExtension()));
-            dump(Storage::disk('local')->putFileAs('thumbails', $file, $post->id . '.' . $file->guessExtension()));  //store a file ij disc local; in storage folder direct
+            $name1 = $file->storeAs('thumbails', $post->id . '.'. $file->guessExtension());  // here is default disc,in .env file
+            $name2 = Storage::disk('local')->putFileAs('thumbails', $file, $post->id . '.' . $file->guessExtension());  //store a file ij disc local; in storage folder direct
+
+            dump(Storage::url($name1));
+            dump(Storage::disk('local')->url($name2));
         }
         die;
 
