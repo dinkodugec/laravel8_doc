@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePost;
 use Illuminate\Http\Request;
 use App\Models\BlogPosts;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -87,25 +88,15 @@ class PostController extends Controller
         $post ->save(); */
         $post = BlogPosts::create($validated);
 
-        $hasFile = $request->hasFile('thumbnail');
-        dump($hasFile);
+        if ($request->hasFile('thumbnail')) {                                //if file is uploaded
+            $path = $request->file('thumbnail')->store('thumbnails');         //store in thumbnails folder
 
-        if ($hasFile) { //if file is uploaded
-            $file = $request->file('thumbnail');
-            dump($file);
-            dump($file->getClientMimeType());
-            dump($file->getClientOriginalExtension());
-
-           /*  dump($file->store('thumbails'));
-            dump(Storage::disk('public')->putFile('thumbails', $file)); */
-
-            $name1 = $file->storeAs('thumbails', $post->id . '.'. $file->guessExtension());  // here is default disc,in .env file
-            $name2 = Storage::disk('local')->putFileAs('thumbails', $file, $post->id . '.' . $file->guessExtension());  //store a file ij disc local; in storage folder direct
-
-            dump(Storage::url($name1));
-            dump(Storage::disk('local')->url($name2));
+            $post->image()->save(
+                Image::create(['path' => $path])
+            );
         }
-        die;
+
+
 
         $request->session()->flash('status', 'The blog post was created!');
 
