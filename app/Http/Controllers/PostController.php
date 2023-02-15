@@ -86,6 +86,19 @@ class PostController extends Controller
         $post ->save(); */
         $post = BlogPosts::create($validated);
 
+        $hasFile = $request->hasFile('thumbnail');
+        dump($hasFile);
+
+        if ($hasFile) { //if file is uploaded
+            $file = $request->file('thumbnail');
+            dump($file);
+            dump($file->getClientMimeType());
+            dump($file->getClientOriginalExtension());
+
+            dump($file->store('thumbails'));
+        }
+        die;
+
         $request->session()->flash('status', 'The blog post was created!');
 
         return redirect()->route('posts.show', ['post' => $post->id]);
