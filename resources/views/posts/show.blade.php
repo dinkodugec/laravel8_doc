@@ -12,7 +12,7 @@
   @endbadg
 </h1>
 
-@tags(['tags'=>$post->tags])@endtags 
+@tags(['tags'=>$post->tags])@endtags
 
 @unless($posts['is_new'])
 <div>It is an old post using unless</div>
@@ -27,6 +27,8 @@ Old Post!
 Brand new Post!
 @endbadge
 @endisset --}}
+
+<img src="{{ $post->image->url() }}" />
 
 
 
