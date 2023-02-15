@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\BlogPosts;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\RewindableGenerator;
 /* use Illuminate\Support\Facades\DB;
  */
@@ -95,7 +96,11 @@ class PostController extends Controller
             dump($file->getClientMimeType());
             dump($file->getClientOriginalExtension());
 
-            dump($file->store('thumbails'));
+           /*  dump($file->store('thumbails'));
+            dump(Storage::disk('public')->putFile('thumbails', $file)); */
+
+            dump($file->storeAs('thumbails', $post->id . '.'. $file->guessExtension()));
+            dump(Storage::disk('local')->putFileAs('thumbails', $file, $post->id . '.' . $file->guessExtension()));  //store a file ij disc local; in storage folder direct
         }
         die;
 
