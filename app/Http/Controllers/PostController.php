@@ -84,9 +84,9 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        /* dd($request); */
+
         $validated = $request->validated();
-        $validatedData['user_id'] = $request->user()->id;
+        $validated['user_id'] = $request->user()->id;
      /*    $post = new BlogPosts();
         $post->title = $validated['title'];
         $post->content = $validated['content'];
@@ -124,7 +124,8 @@ class PostController extends Controller
         //     }])->findOrFail($id),
         // ]);
         return view('posts.show', [
-            'post' => BlogPosts::with('comments')->with('tags')->with('tags')->findOrFail($id), //eager loading
+           /*  'post' => BlogPosts::with('comments')->with('tags')->with('tags')->findOrFail($id), //eager loading */
+           'post' => BlogPosts::findOrFail($id)
         ]);
     }
 
@@ -180,7 +181,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
 
      $post = BlogPosts::findOrFail($id);
@@ -190,12 +191,12 @@ class PostController extends Controller
          abort(403, "you can not delete this blog posts"); //redirect to specific page with specific message
      } */
 
-     $this->authorize('delete', $post);
+     /* $this->authorize('delete', $post); */
      $post->delete();
 
-     $request->session()->flash('status', 'Blog post was deleted!');
+    session()->flash('status', 'Blog post was deleted!');
 
-     return redirect()->route('posts.index');
+     return redirect()->route('post.index');
 
     }
 }

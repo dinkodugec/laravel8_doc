@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section ('title', $posts['title'])
+@section ('title', $post['title'])
 
 
 @section('content')
@@ -14,7 +14,7 @@
 
 @tags(['tags'=>$post->tags])@endtags
 
-@unless($posts['is_new'])
+@unless($post['is_new'])
 <div>It is an old post using unless</div>
 @badge
 Old Post!
@@ -28,10 +28,18 @@ Brand new Post!
 @endbadge
 @endisset --}}
 
-<img src="{{ $post->image->url() }}" />
+{{-- <img src="{{ $post->image->url() }}" /> --}}
+
+<div>
+    <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit"  class="btn btn-outline-danger">Delete</button>
+        {{-- <input class="btn btn-danger mt-4" type="submit" value="delete"> --}}
+        </form>
+</div>
 
 
-
-<h1>{{ $posts['title'] }}</h1>
-<h1>{{ $posts['content'] }}</h1>
+<h1>{{ $post['title'] }}</h1>
+<h1>{{ $post['content'] }}</h1>
 @endsection
