@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form action="{{ route('posts.update', ['post' => $post-id]) }}" method="POST">{{-- route is helper function --}}
+<form action="{{ route('post.update', ['post' => $post-id]) }}" method="POST">{{-- route is helper function --}}
 @csrf
 @method('PUT')
 @include('posts.partials.form')

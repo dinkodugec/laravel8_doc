@@ -1,8 +1,15 @@
-<div><input type="text" name="title" value="{{ old('title'), optional($post ?? null)->title }}">
+
+<div>
+    <input type="text" name="title" value="{{ old('title'), optional($post ?? null)->title }}">
     @error('title')
        <div>{{ $message }}</div>
     @enderror
-    <div><textarea name="content" value="{{ old('content', optional($post ?? null)->content) }}" id="" cols="30" rows="10"></textarea></div>
+
+    <div>
+        <textarea name="content" value="{{ old('content', optional($post ?? null)->content) }}" id="" cols="30" rows="10">
+        </textarea>
+    </div>
+
     @if ($errors->any())
         <div>
             <ul>
@@ -16,4 +23,10 @@
         <label for="">Thumbnail</label>
         <input type="file" class="form-control-file" name="thumbnail" value="">
     </div>
-    </div>
+
+
+
+
+</div>
+
+

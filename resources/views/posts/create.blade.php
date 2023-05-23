@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
 
 @section('title', 'Create the post')
@@ -6,12 +6,14 @@
 
 @section('content')
 
-<form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
-@csrf
+<form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
 
-@include('posts.partials.form');
+    @include('posts.partials.form')
 
-<div><input type="submit" value="Create"></div>
+    <input class="btn btn-primary mt-4" type="submit" value="Save a Post">
+
+
 </form>
 
 @endsection

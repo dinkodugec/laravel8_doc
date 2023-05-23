@@ -18,7 +18,7 @@
                         @if ($post->trashed())
                         <del>
                         @endif
-                        <a class="{{ $post->trashed() ? 'text-muted' : '' }}" href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
+                        <a class="{{ $post->trashed() ? 'text-muted' : '' }}" href="{{ route('post.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
                         @if ($post->trashed())
                         <del>
                         @endif
@@ -42,7 +42,7 @@
             @endcannot --}}
 
             @can('update', $post)
-            <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="post">
+            <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post">
             @csrf
             @method('DELETE')
             <input type="submit" value="delete">
@@ -65,7 +65,7 @@
                         <ul class="list-group list-group-flush">
                             @foreach ($mostCommented as $post)
                                 <li class="list-group-item">
-                                    <a href="{{ route('posts.show', ['post' => $post->id]) }}">
+                                    <a href="{{ route('post.show', ['post' => $post->id]) }}">
                                         {{ $post->title }}
                                     </a>
                                 </li>

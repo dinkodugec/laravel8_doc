@@ -53,11 +53,16 @@ class PostController extends Controller
 
 
 
-        return view('posts.index', ['posts' => BlogPosts::latest()->withCount('comments')->get()->with('users')->with('tags')->get(), //eager loading
+ /*        return view('posts.index', ['posts' => BlogPosts::latest()->withCount('comments')->get()->with('users')->with('tags')->get(), //eager loading
         'mostCommented' => BlogPosts::mostCommented()->take(5)->get(),
         'mostActive' => User::withMostBlogPosts()->take(5)->get(),
         'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
-    ]);
+    ]); */
+
+    $posts = BlogPosts::all();
+
+
+    return view('posts.index', compact('posts'));
     }
 
     /**
@@ -139,7 +144,7 @@ class PostController extends Controller
         if(Gate::denies('update-post', $post)) {
             abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
         }
-       return view('posts.edit', ['posts' => BlogPosts::findOrFail($id)]);
+       return view('post.edit', ['post' => BlogPosts::findOrFail($id)]);
     }
 
     /**
