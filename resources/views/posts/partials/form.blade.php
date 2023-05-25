@@ -1,25 +1,32 @@
 
 <div>
-    <input type="text" name="title" value="{{ old('title'), optional($post ?? null)->title }}">
+    <div class="form-group">
+        <label for="title">Title</label>
+    <input type="text" name="title" class="form-control" placeholder=" title " value="{{ old('title'), optional($post ?? null)->title }}">
     @error('title')
-       <div>{{ $message }}</div>
+       <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+</div>
 
-    <div>
-        <textarea name="content" value="{{ old('content', optional($post ?? null)->content) }}" id="" cols="30" rows="10">
+    <div class="form-group mt-5">
+        <label for="content">Content</label>
+        <textarea name="content" class="form-control" placeholder="content here" value="{{ old('content', optional($post ?? null)->content) }}" id="" cols="30" rows="10">
         </textarea>
+        @error('content')
+        <div class="alert alert-danger">{{ $message }}</div>
+     @enderror
     </div>
 
     @if ($errors->any())
-        <div>
-            <ul>
+        <div class="mb-3">
+            <ul class="list-group">
                 @foreach ( $errors->all() as $error)
-                  <li>{{ $error }}</li>
+                  <li class="list-group-item list-group-danger">{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
     @endif
-    <div class="form-group">
+    <div class="form-group mt-5">
         <label for="">Thumbnail</label>
         <input type="file" class="form-control-file" name="thumbnail" value="">
     </div>

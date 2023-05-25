@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
 
 @section('title', 'Update the post')
@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form action="{{ route('post.update', ['post' => $post-id]) }}" method="POST">{{-- route is helper function --}}
+<form action="{{ route('post.update', $post) }}" method="POST"> {{-- route is helper function --}}
 @csrf
 @method('PUT')
 @include('posts.partials.form')

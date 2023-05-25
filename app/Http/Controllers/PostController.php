@@ -140,12 +140,14 @@ class PostController extends Controller
 
         $post = BlogPosts::findOrFail($id);
 
-        $this->authorize('update', $post);  //method define in policy
+
+
+  /*       $this->authorize('update', $post);  //method define in policy
 
         if(Gate::denies('update-post', $post)) {
             abort(403, "you can not edit this blog posts"); //redirect to specific page with specific message
-        }
-       return view('post.edit', ['post' => BlogPosts::findOrFail($id)]);
+        } */
+       return view('posts.partials.edit')->with($post);
     }
 
     /**
