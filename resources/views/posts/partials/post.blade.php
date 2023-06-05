@@ -7,7 +7,7 @@
 <div style="background-color: silver">{{ $key}} . {{ $post->title }}</div>
 @endif --}}
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-8">
         @foreach ($posts as $post )
 
@@ -41,7 +41,7 @@
             <p>You can not delete that post</p>
             @endcannot --}}
 
-            @can('update', $post)
+  {{--           @can('update', $post)
             <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post">
             @csrf
             @method('DELETE')
@@ -51,8 +51,8 @@
 
         </div>
         @endforeach
-    </div>
-    <div class="col-4">
+    </div> --}}
+   {{--  <div class="col-4">
             <div class="container">
                 <div class="row">
                     <div class="card" style="width: 100%;">
@@ -110,5 +110,57 @@
             </div>
         </div>
       </div>
-    </div>
+    </div> --}}
+</div>
+
+<div class="container  ">
+@forelse ($posts as $post)
+<p>
+    <h3>
+        <a href="{{ route('post.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
+    </h3>
+
+    <p class="text-muted">
+        Added {{ $post->created_at->diffForHumans() }}
+        by {{ $post->user->name }}
+    </p>
+
+    @if($post->comments_count)
+        <p>{{ $post->comments_count }} comments</p>
+    @else
+        <p>No comments yet!</p>
+    @endif
+
+
+        <a href="{{ route('post.edit', ['post' => $post->id]) }}"
+            class="btn btn-primary">
+            Edit
+        </a>
+
+
+    {{-- @cannot('delete', $post)
+        <p>You can't delete this post</p>
+    @endcannot --}}
+
+   {{--  @can('delete', $post)
+        <form method="POST" class="fm-inline"
+            action="{{ route('posts.destroy', ['post' => $post->id]) }}">
+            @csrf
+            @method('DELETE')
+
+            <input type="submit" value="Delete!" class="btn btn-primary"/>
+        </form>
+    @endcan --}}
+
+    <form method="POST" class="fm-inline"
+            action="{{ route('post.destroy', ['post' => $post->id]) }}">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"  class="btn btn-outline-danger">Delete</button>
+        </form>
+</p>
+@empty
+<p>No blog posts yet!</p>
+@endforelse
 </div>

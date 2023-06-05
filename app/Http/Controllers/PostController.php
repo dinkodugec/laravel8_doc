@@ -62,6 +62,7 @@ class PostController extends Controller
     $posts = BlogPosts::all();
 
 
+
     return view('posts.index', compact('posts'));
     }
 

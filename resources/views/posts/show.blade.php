@@ -5,7 +5,7 @@
 
 @section('content')
 
-<h1>
+{{-- <h1>
   {{ $post->title }}
   @badge(['show' => now()->diffInMinutes($post->created_at) < 30])
       Brand new Post!
@@ -40,6 +40,34 @@ Brand new Post!
 </div>
 
 
+{{-- <h1>{{ $post->title }}</h1>
+<h1>{{ $post->content }}</h1>  --}}
+
 <h1>{{ $post->title }}</h1>
-<h1>{{ $post->content }}</h1>
+<br>
+<p>{{ $post->content }}</p>
+<br>
+
+<p>Added {{ $post->created_at->diffForHumans() }}</p>
+<br>
+
+@if ((new Carbon\Carbon())->diffInMinutes($post->created_at) < 5 )
+    <strong>New!</strong>
+@endif
+
+<br>
+<h4>Comments</h4>
+
+@forelse($post->comments as $comment)
+    <p>
+        {{ $comment->content }}
+    </p>
+    <p class="text-muted">
+        added {{ $comment->created_at->diffForHumans() }}
+    </p>
+    <br>
+@empty
+    <p>No comments yet!</p>
+@endforelse
+
 @endsection
