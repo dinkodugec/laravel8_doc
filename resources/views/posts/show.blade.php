@@ -47,7 +47,8 @@ Brand new Post!
 <br>
 <p>{{ $post->content }}</p>
 <br>
-
+<p> Currently read by {{ $counter }} people</p>
+<br>
 <p>Added {{ $post->created_at->diffForHumans() }}</p>
 <br>
 
