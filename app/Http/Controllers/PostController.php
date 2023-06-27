@@ -57,13 +57,25 @@ class PostController extends Controller
         'mostCommented' => BlogPosts::mostCommented()->take(5)->get(),
         'mostActive' => User::withMostBlogPosts()->take(5)->get(),
         'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
+        'postWithComments" => BlogPosts::has('comments')->get()
+        '
     ]); */
 
     $posts = BlogPosts::all();
 
+    /* $trashedPosts = BlogPosts::onlyTrashed()->get()->pluck('title');  This will back a collcetion of trashed models*/
 
 
-    return view('posts.index', compact('posts'));
+
+    return view('posts.index', [
+        'posts' => BlogPosts::latest()->withCount('comments')->with('user')-> get(),
+        'mostCommented' => BlogPosts::mostCommented()->take(5)->get(),
+        'mostActive' => User::withMostBlogPosts()->take(5)->get(),
+        'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
+        /* 'trashedPosts' => BlogPosts::withTrashed()->get(), //withTrashed method is starting a new instance of querybuilder so we get collection
+         'onlyTrashed' => BlogPosts::onlyTrashed()->get()->pluck('title') //only one property from collection */
+       /*   'onlyTrashed' => BlogPosts::onlyTrashed()->where('id', 13)->get()*/
+    ]);
     }
 
     /**
@@ -106,7 +118,7 @@ class PostController extends Controller
 
         $request->session()->flash('status', 'The blog post was created!');
 
-        return redirect()->route('posts.show', ['post' => $post->id]);
+        return redirect()->route('post.show', ['post' => $post->id]);
         }
 
     /**

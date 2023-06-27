@@ -52,7 +52,9 @@ Brand new Post!
 <br>
 
 @if ((new Carbon\Carbon())->diffInMinutes($post->created_at) < 5 )
-    <strong>New!</strong>
+      @component('badge')
+
+      @endcomponent
 @endif
 
 <br>

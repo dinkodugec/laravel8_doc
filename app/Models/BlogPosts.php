@@ -46,6 +46,8 @@ class BlogPosts extends Model
     public static function boot()
     {
 
+        static::addGlobalScope(new LatestScope);
+
         static::addGlobalScope(new DeletedAdminScope);
 
         parent::boot();

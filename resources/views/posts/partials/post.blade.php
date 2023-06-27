@@ -114,15 +114,17 @@
 </div>
 
 <div class="container  ">
+
 @forelse ($posts as $post)
 <p>
     <h3>
-        <a href="{{ route('post.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
+        <a class="btn btn-primary mt-4" href="{{ route('post.show', ['post' => $post->id]) }}"> <h3 class="">{{ $post->title }}</h3> </a>
     </h3>
 
     <p class="text-muted">
         Added {{ $post->created_at->diffForHumans() }}
         by {{ $post->user->name }}
+        <p>{{ $post->id }}</p>
     </p>
 
     @if($post->comments_count)
@@ -131,9 +133,17 @@
         <p>No comments yet!</p>
     @endif
 
+    @if($post->onlyTrashed)
+    <p>Trashed!!</p>
+@else
+    <p>No comments yet!</p>
+@endif
+
+
+
 
         <a href="{{ route('post.edit', ['post' => $post->id]) }}"
-            class="btn btn-primary">
+            class="btn btn-info">
             Edit
         </a>
 
@@ -163,4 +173,3 @@
 @empty
 <p>No blog posts yet!</p>
 @endforelse
-</div>
