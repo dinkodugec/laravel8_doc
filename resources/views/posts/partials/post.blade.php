@@ -162,13 +162,16 @@
         </form>
     @endcan --}}
 
-    <form method="POST" class="fm-inline"
+        <form method="POST" class="fm-inline"
             action="{{ route('post.destroy', ['post' => $post->id]) }}">
             @csrf
             @method('DELETE')
 
             <button type="submit"  class="btn btn-outline-danger">Delete</button>
         </form>
+
+       
+
 </p>
 @empty
 <p>No blog posts yet!</p>

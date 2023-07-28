@@ -16,8 +16,8 @@ class CreateBlogPostsTagTable extends Migration
         Schema::create('blog_posts_tag', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('blog_post_id')->index();
-            $table->foreign('blog_post_id')->references('id')
+            $table->unsignedBigInteger('blog_posts_id')->index();
+            $table->foreign('blog_posts_id')->references('id')
                 ->on('blog_posts')
                 ->onDelete('cascade');
 

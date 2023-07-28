@@ -58,6 +58,7 @@ Brand new Post!
       @endcomponent
 @endif
 
+
 <br>
 <h4>Comments</h4>
 
