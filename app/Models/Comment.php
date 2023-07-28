@@ -28,6 +28,11 @@ class Comment extends Model
            return $query->orderBy(static::CREATED_AT, 'desc');
        }
 
+       public function user()
+       {
+           return $this->belongsTo('App\User');
+       }
+
 
 
        public static function boot()

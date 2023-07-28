@@ -62,6 +62,8 @@ Brand new Post!
 <br>
 <h4>Comments</h4>
 
+@include('comments._form')
+
 @forelse($post->comments as $comment)
     <p>
         {{ $comment->content }}
