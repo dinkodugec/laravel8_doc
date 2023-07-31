@@ -142,12 +142,16 @@ class PostController extends Controller
         if ($hasFile){
             $file = $request->file('thumbnail');
 
-            dump($file->store('thumbails'));
-            dump(Storage::disk('public')->put('thumbails', $file));
+          /*   dump($file->store('thumbails')); */
+            $name1 = Storage::disk('public')->put('thumbails', $file);
 
-       
+            dump(Storage::url($name1));
+           /*  dump(Storage::disk('public')->url($name1)); */
+
+
 
         }
+        die();
 
     /*     if ($request->hasFile('thumbnail')) {                                //if file is uploaded
             $path = $request->file('thumbnail')->store('thumbnails');         //store in thumbnails folder
