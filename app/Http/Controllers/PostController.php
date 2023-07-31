@@ -137,14 +137,26 @@ class PostController extends Controller
     /*     dump($request->hasFile('thumbnail'));
         die(); */
 
-        if ($request->hasFile('thumbnail')) {                                //if file is uploaded
+        $hasFile = $request->hasFile('thumbnail');
+
+        if ($hasFile){
+            $file = $request->file('thumbnail');
+
+            dump($file->store('thumbails'));
+            dump(Storage::disk('public')->put('thumbails', $file));
+
+       
+
+        }
+
+    /*     if ($request->hasFile('thumbnail')) {                                //if file is uploaded
             $path = $request->file('thumbnail')->store('thumbnails');         //store in thumbnails folder
 
             $post->image()->save(
                 Image::create(['path' => $path])
             );
         }
-
+ */
 
 
         $request->session()->flash('status', 'The blog post was created!');
