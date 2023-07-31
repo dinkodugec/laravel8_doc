@@ -7,7 +7,7 @@
                 <textarea type="text" name="content" class="form-control"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Add comment</button>
+            <button type="submit" class="btn btn-outline-primary">Add comment</button>
         </form>
     @else
         <a href="{{ route('login') }}">Sign-in</a> to post comments!

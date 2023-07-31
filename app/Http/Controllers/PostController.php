@@ -121,6 +121,22 @@ class PostController extends Controller
         $post ->save(); */
         $post = BlogPosts::create($validated);
 
+    /*     $hasFile = $request->hasFile('thumbnail');
+        dump($hasFile);
+
+        if ($hasFile) {
+            $file = $request->file('thumbnail');
+            dump($file);
+            dump($file->getClientMimeType());
+            dump($file->getClientOriginalExtension());
+
+            dump($file->store('thumbails'));
+        }
+        die; */
+
+    /*     dump($request->hasFile('thumbnail'));
+        die(); */
+
         if ($request->hasFile('thumbnail')) {                                //if file is uploaded
             $path = $request->file('thumbnail')->store('thumbnails');         //store in thumbnails folder
 
@@ -153,7 +169,9 @@ class PostController extends Controller
         // ]);
 
          $blogPost = Cache::remember("blog-post-{$id}", 60, function() use($id) {
-            return BlogPosts::with('comments')->findOrFail($id);
+            return BlogPosts::with('comments', 'tags')
+             //->with('comments.user')nested relation - with relation comments and user
+            ->findOrFail($id);
         });
 
         $sessionId = session()->getId();
