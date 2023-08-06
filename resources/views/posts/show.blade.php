@@ -4,6 +4,23 @@
 
 
 @section('content')
+<div class="row">
+    <div class="col-8">
+
+        @if($post->image)
+        <div style="background-image: url('{{ $post->image->url() }}'); min-height: 500px; color: white; text-align: center; background-attachment: fixed;">
+            <h1 style="padding-top: 100px; text-shadow: 1px 2px #000">
+        @else
+            <h1>
+        @endif
+
+        @if($post->image)
+         </h1>
+       </div>
+        @else
+            </h1>
+        @endif
+
 
 {{-- <h1>
   {{ $post->title }}
@@ -52,7 +69,7 @@ Brand new Post!
 <p>Added {{ $post->created_at->diffForHumans() }}</p>
 <br>
 
-<img src="{{  $post->image->url() }}" />
+
 
 @if ((new Carbon\Carbon())->diffInMinutes($post->created_at) < 5 )
       @component('badge')
@@ -78,4 +95,6 @@ Brand new Post!
     <p>No comments yet!</p>
 @endforelse
 
+  </div>
+</div>
 @endsection
