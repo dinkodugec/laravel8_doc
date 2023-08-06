@@ -115,52 +115,19 @@ class PostController extends Controller
 
         $validated = $request->validated();
         $validated['user_id'] = $request->user()->id;
-     /*    $post = new BlogPosts();
-        $post->title = $validated['title'];
-        $post->content = $validated['content'];
-        $post ->save(); */
         $post = BlogPosts::create($validated);
 
-    /*     $hasFile = $request->hasFile('thumbnail');
-        dump($hasFile);
-
-        if ($hasFile) {
-            $file = $request->file('thumbnail');
-            dump($file);
-            dump($file->getClientMimeType());
-            dump($file->getClientOriginalExtension());
-
-            dump($file->store('thumbails'));
-        }
-        die; */
-
-    /*     dump($request->hasFile('thumbnail'));
-        die(); */
-
-        $hasFile = $request->hasFile('thumbnail');
-
-        if ($hasFile){
-            $file = $request->file('thumbnail');
-
-          /*   dump($file->store('thumbails')); */
-            $name1 = Storage::disk('public')->put('thumbails', $file);
-
-            dump(Storage::url($name1));
-           /*  dump(Storage::disk('public')->url($name1)); */
 
 
 
-        }
-        die();
 
-    /*     if ($request->hasFile('thumbnail')) {                                //if file is uploaded
+        if($request->hasFile('thumbnail')) {                                //if file is uploaded
             $path = $request->file('thumbnail')->store('thumbnails');         //store in thumbnails folder
-
             $post->image()->save(
-                Image::create(['path' => $path])
+            Image::create(['path' => $path])
             );
         }
- */
+
 
 
         $request->session()->flash('status', 'The blog post was created!');

@@ -15,7 +15,7 @@ class Image extends Model
 
     public function blogPost()
     {
-        return $this->hasOne(BlogPosts::class);
+        return $this->belongsTo(BlogPosts::class);
     }
 
     public function url()
