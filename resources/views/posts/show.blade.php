@@ -52,6 +52,8 @@ Brand new Post!
 <p>Added {{ $post->created_at->diffForHumans() }}</p>
 <br>
 
+<img src="{{  $post->image->url() }}" />
+
 @if ((new Carbon\Carbon())->diffInMinutes($post->created_at) < 5 )
       @component('badge')
 
