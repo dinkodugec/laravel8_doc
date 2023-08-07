@@ -123,7 +123,7 @@
 
     <p class="text-muted">
         Added {{ $post->created_at->diffForHumans() }}
-        by {{ $post->user->name }}
+        by <a href="{{ route('users.show', ['user' => $post->user->id]) }}">{{ $post->user->name }}</a>
         <p>{{ $post->id }}</p>
     </p>
 
@@ -132,6 +132,8 @@
     @else
         <p>No comments yet!</p>
     @endif
+
+
 
     @if($post->onlyTrashed)
     <p>Trashed!!</p>
@@ -170,7 +172,7 @@
             <button type="submit"  class="btn btn-outline-danger">Delete</button>
         </form>
 
-       
+
 
 </p>
 @empty
