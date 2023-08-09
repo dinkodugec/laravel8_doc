@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Storage;
 class Image extends Model
 {
 
-    protected $fillable = ['path', 'blog_post_id'];
+    protected $fillable = ['path'];
 
     use HasFactory;
 
-    public function blogPost()
+    public function imageable()
     {
-        return $this->belongsTo(BlogPosts::class);
+        return $this->morphTo();
     }
 
     public function url()

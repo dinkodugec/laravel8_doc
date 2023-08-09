@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameBlogPostsIdInImagesTabel extends Migration
+class DeleteblogpostidfromImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class RenameBlogPostsIdInImagesTabel extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->renameColumn('blog_post_id', 'blog_posts_id');
+            $table->dropColumn('blog_posts_id');
+
+
         });
     }
 
@@ -26,7 +28,8 @@ class RenameBlogPostsIdInImagesTabel extends Migration
     public function down()
     {
         Schema::table('images', function (Blueprint $table) {
-            //
+            $table->unsignedInteger('blog_posts_id')->nullable();
+
         });
     }
 }

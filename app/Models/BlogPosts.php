@@ -31,6 +31,8 @@ class BlogPosts extends Model
 
 
 
+
+
     public function scopeLatest(Builder $query)
     {
         return $query->orderBy(static::CREATED_AT, 'desc');
@@ -74,7 +76,7 @@ class BlogPosts extends Model
 
     public function image()
     {
-        return $this->hasOne(Image::class);
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 
