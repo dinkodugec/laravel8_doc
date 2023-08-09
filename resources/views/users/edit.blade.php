@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-4">
-                <img src="" style="width: 128px;
+                <img src="{{ $user->image ? $user->image->url() : '' }}" style="width: 128px;
                 height: 128px;" class="img-thumbnail avatar" />
 
                 <div class="card mt-4">
