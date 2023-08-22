@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use App\Models\BlogPosts;
 
 class Comment extends Model
 {
@@ -19,12 +20,18 @@ class Comment extends Model
     protected $fillable = ['user_id', 'content'];
 
        // blog_post_id - by default laravel will try find a forign key blog_post_id in Comment table
-       public function blogPost()
+  /*       public function blogPost()
        {
            // return $this->belongsTo('App\BlogPost', 'post_id', 'blog_post_id');
            return $this->belongsTo(BlogPosts::class);
 
+       } */
+
+       public function commentable()
+       {
+           return $this->morphTo();
        }
+
 
        public function scopeLatest(Builder $query)
        {
@@ -45,8 +52,11 @@ class Comment extends Model
 
           /*  static::addGlobalScope(new LatestScope); */
           static::creating(function (Comment $comment) {
-            Cache::tags(['blog-post'])->forget("blog-post-{$comment->blog_post_id}");
-            Cache::tags(['blog-post'])->forget('mostCommented');
+             if ($comment->commentable_type === BlogPosts::class) {
+                Cache::tags(['blog-post'])->forget("blog-post-{$comment->commentable_id}");
+                Cache::tags(['blog-post'])->forget('mostCommented');
+            }
+
         });
 
 

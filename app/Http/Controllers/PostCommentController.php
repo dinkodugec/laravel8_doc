@@ -23,6 +23,7 @@ class PostCommentController extends Controller
 
         $request->session()->flash('status', 'Comment was created!');
 
-        return redirect()->back();
+        return redirect()->back()
+        ->withStatus('Comment was created!');;
     }
 }
