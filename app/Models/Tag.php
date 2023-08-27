@@ -11,6 +11,7 @@ class Tag extends Model
 
     public function blogPosts()
     {
-        return $this->belongsToMany(BlogPosts::class)->withTimestamps()->as('tagged');
+        /* return $this->belongsToMany(BlogPosts::class)->withTimestamps()->as('tagged'); */
+        return $this->morphedByMany('App\BlogPost', 'taggable')->withTimestamps()->as('tagged');
     }
 }

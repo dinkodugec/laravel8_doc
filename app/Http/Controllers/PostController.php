@@ -84,6 +84,7 @@ class PostController extends Controller
 
     return view('posts.index', [
         'posts' => BlogPosts::latest()->withCount('comments')->with('user')-> get(),
+        // 'posts' => BlogPosts::paginate(10),
         'mostCommented' => $mostCommented,
         'mostActive' => $mostActive,
         'mostActiveLastMonth' => $mostActiveLastMonth,

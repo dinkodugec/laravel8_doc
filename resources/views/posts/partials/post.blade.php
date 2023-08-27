@@ -178,3 +178,9 @@
 @empty
 <p>No blog posts yet!</p>
 @endforelse
+{{-- <div class="py-10">
+    {{ $posts->links() }}
+</div> --}}
+
+</div>
+
