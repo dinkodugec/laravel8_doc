@@ -32,6 +32,11 @@ class Comment extends Model
            return $this->morphTo();
        }
 
+       public function tags()
+       {
+           return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
+       }
+
 
        public function scopeLatest(Builder $query)
        {
