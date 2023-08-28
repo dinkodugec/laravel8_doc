@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 use App\Models\BlogPosts;
+use App\Traits\Taggable;
 
 class Comment extends Model
 {
 
-    use SoftDeletes;
+    use SoftDeletes, Taggable;
 
     use HasFactory;
 
@@ -32,10 +33,6 @@ class Comment extends Model
            return $this->morphTo();
        }
 
-       public function tags()
-       {
-           return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
-       }
 
 
        public function scopeLatest(Builder $query)
