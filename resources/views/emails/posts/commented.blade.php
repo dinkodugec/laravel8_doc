@@ -7,6 +7,7 @@
   <p>Hi {{ $comment->commentable->user->name }}</p>
 
 <p>
+    <img src="{{ $message->embed($comment->user->image->url()) }}"/>
     Someone has commented on your blog post
     <a href="{{ route('post.show', ['post' => $comment->commentable->id]) }}">
         {{ $comment->commentable->title }}

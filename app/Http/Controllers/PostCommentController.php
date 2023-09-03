@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComment;
 use App\Mail\CommentPosted;
+use App\Mail\CommentPostedMarkdown;
 use App\Models\BlogPosts;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class PostCommentController extends Controller
 
 
         Mail::to($post->user)->send( //it accept instance of CommentPosted class, which extends a mailable class
-            new CommentPosted($comment)
+            new CommentPostedMarkdown($comment)
         );
 
         $request->session()->flash('status', 'Comment was created!');
