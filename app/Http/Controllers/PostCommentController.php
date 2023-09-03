@@ -26,7 +26,7 @@ class PostCommentController extends Controller
 
 
 
-        Mail::to($post->user)->send(
+        Mail::to($post->user)->send( //it accept instance of CommentPosted class, which extends a mailable class
             new CommentPosted($comment)
         );
 
