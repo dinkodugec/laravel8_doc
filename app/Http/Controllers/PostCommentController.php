@@ -27,11 +27,22 @@ class PostCommentController extends Controller
 
 
 
-        Mail::to($post->user)->send( //it accept instance of CommentPosted class, which extends a mailable class
+  /*       Mail::to($post->user)->send( //it accept instance of CommentPosted class, which extends a mailable class
             new CommentPostedMarkdown($comment)
-        );
+        ); */
 
-        $request->session()->flash('status', 'Comment was created!');
+            // Mail::to($post->user)->queue(
+        //     new CommentPostedMarkdown($comment)
+        // );
+
+        $when = now()->addMinutes(1);
+
+        Mail::to($post->user)->later(
+            $when,
+            new CommentPostedMarkdown($comment)
+         );
+
+
 
         return redirect()->back()
         ->withStatus('Comment was created!');;
