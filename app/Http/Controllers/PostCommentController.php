@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComment;
+use App\Jobs\NotifyyUsersPostWasCommented;
 use App\Mail\CommentPosted;
 use App\Mail\CommentPostedMarkdown;
 use App\Models\BlogPosts;
@@ -41,6 +42,8 @@ class PostCommentController extends Controller
             $when,
             new CommentPostedMarkdown($comment)
          );
+
+      NotifyyUsersPostWasCommented::dispatch($comment);
 
 
 
