@@ -48,18 +48,6 @@ class BlogPosts extends Model
 
         parent::boot();
 
-        //clearing cache
-        static::updating(function (BlogPosts $blogPost) {
-            Cache::forget("blog-post-{$blogPost->id}");
-        });
-
-       static::deleting(function (BlogPosts $blogPosts) {
-            $blogPosts->comments()->delete(); //delete blogposts model and related comments from database
-        });
-
-        static::restoring(function (BlogPosts $blogPosts) {   //restore
-            $blogPosts->comments()->restore();
-        });
     }
 
     public function user()

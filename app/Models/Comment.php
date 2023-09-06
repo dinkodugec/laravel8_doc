@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Cache;
 use App\Models\BlogPosts;
 use App\Traits\Taggable;
 
@@ -45,22 +44,4 @@ class Comment extends Model
            return $this->belongsTo(User::class);
        }
 
-
-
-       public static function boot()
-       {
-
-           parent::boot();
-
-          /*  static::addGlobalScope(new LatestScope); */
-          static::creating(function (Comment $comment) {
-             if ($comment->commentable_type === BlogPosts::class) {
-                Cache::tags(['blog-post'])->forget("blog-post-{$comment->commentable_id}");
-                Cache::tags(['blog-post'])->forget('mostCommented');
-            }
-
-        });
-
-
-       }
 }
