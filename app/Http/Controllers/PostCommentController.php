@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentPosted as EventsCommentPosted;
 use App\Http\Requests\StoreComment;
 use App\Jobs\NotifyyUsersPostWasCommented;
 use App\Mail\CommentPosted;
@@ -26,6 +27,7 @@ class PostCommentController extends Controller
             'user_id' => $request->user()->id
         ]);
 
+        event(new CommentPosted($comment));
 
 
   /*       Mail::to($post->user)->send( //it accept instance of CommentPosted class, which extends a mailable class
@@ -43,7 +45,7 @@ class PostCommentController extends Controller
             new CommentPostedMarkdown($comment)
          );
 
-      NotifyyUsersPostWasCommented::dispatch($comment);
+
 
 
 
