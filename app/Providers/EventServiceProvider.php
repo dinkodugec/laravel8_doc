@@ -8,6 +8,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Jobs\NotifyyUsersPostWasCommented;
 use App\Events\CommentPosted;
+use App\Listeners\CacheSubscriber;
 use App\Listeners\NotifyUsersAboutComment;
 
 class EventServiceProvider extends ServiceProvider
@@ -27,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
         BlogPostPosted::class => [
             NotifyAdminWhenBlogPostCreated::class
         ]
+    ];
+
+    protected $subscribe = [
+        CacheSubscriber::class
     ];
 
     /**

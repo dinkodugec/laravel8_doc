@@ -13,15 +13,9 @@ class NotifyAdminWhenBlogPostCreated
 {
 
 
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
     public function handle(BlogPostPosted $event)
     {
-        User::thatIsAnAdmi()->get()
+        User::thatIsAnAdmin()->get()
         ->map(function (User $user) {
             Mail::to($user)->send(
                 new BlogPostAdded()
