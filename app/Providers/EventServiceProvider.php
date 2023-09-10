@@ -23,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CommentPosted::class => [
             NotifyUsersAboutComment::class
+        ],
+        BlogPostPosted::class => [
+            NotifyAdminWhenBlogPostCreated::class
         ]
     ];
 

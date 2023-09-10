@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BlogPostPosted;
 use App\Http\Requests\StorePost;
 use Illuminate\Http\Request;
 use App\Models\BlogPosts;
@@ -128,6 +129,8 @@ class PostController extends Controller
             Image::make(['path' => $path])
             );
         }
+
+        event(new BlogPostPosted($post));
 
 
 

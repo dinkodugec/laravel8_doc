@@ -83,4 +83,9 @@ class User extends Authenticatable
                 ->where('commentable_type', '=', BlogPosts::class);
         });
     }
+
+    public function scopeThatIsAnAdmin(Builder $query)
+    {
+        return $query->where('is_admin', true);
+    }
 }
