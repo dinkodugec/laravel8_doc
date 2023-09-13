@@ -127,11 +127,12 @@
         <p>{{ $post->id }}</p>
     </p>
 
-    @if($post->comments_count)
+{{--     @if($post->comments_count)
         <p>{{ $post->comments_count }} comments</p>
     @else
         <p>No comments yet!</p>
-    @endif
+    @endif --}}
+    {{ trans_choice('messages.comments', $post->comments_count) }}
 
 
 
@@ -146,7 +147,7 @@
 
         <a href="{{ route('post.edit', ['post' => $post->id]) }}"
             class="btn btn-info">
-            Edit
+            {{ __('Edit') }}
         </a>
 
 
@@ -169,7 +170,7 @@
             @csrf
             @method('DELETE')
 
-            <button type="submit"  class="btn btn-outline-danger">Delete</button>
+            <button type="submit"  class="btn btn-outline-danger">{{ __('Delete!') }}</button>
         </form>
 
 

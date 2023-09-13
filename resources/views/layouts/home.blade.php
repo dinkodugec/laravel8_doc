@@ -15,9 +15,9 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="{{ route('post.index') }}">Blog Posts</a>
-            <a class="p-2 text-dark" href="{{ route('post.create') }}">Add Blog Post</a>
-            <a class="p-2 text-dark" href="{{ route('dashboard') }}">Dashboard</a>
+            <a class="p-2 text-dark" href="{{ route('post.index') }}">{{ __('Blog Posts') }}</a>
+            <a class="p-2 text-dark" href="{{ route('post.create') }}">{{ __('Add Blog Post') }}</a>
+            <a class="p-2 text-dark" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
         </nav>
     </div>
 
