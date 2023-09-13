@@ -27,6 +27,15 @@
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">{{ __('Dashboard') }}</a>
+                        <a class="p-2 text-dark"
+                        href="{{ route('users.show', ['user' => Auth::user()->id]) }}">
+                        {{ __('Profile') }}
+                    </a>
+                    <a class="p-2 text-dark"
+                        href="{{ route('users.edit', ['user' => Auth::user()->id]) }}"
+                        class="text-sm text-gray-700 underline">
+                        {{ __('Edit Profile') }}
+                    </a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{ __('Login') }}</a>
 
@@ -37,7 +46,7 @@
                 </div>
             @endif
 
-      
+
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
 
