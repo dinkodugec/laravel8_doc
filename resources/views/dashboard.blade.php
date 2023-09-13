@@ -17,6 +17,9 @@
                     <p>{{ trans_choice('messages.plural', 0, ['a' => 1]) }}</p>
                     <p>{{ trans_choice('messages.plural', 1, ['a' => 1]) }}</p>
                     <p>{{ trans_choice('messages.plural', 2, ['a' => 1]) }}</p>
+
+                    <p>Using JSON: {{ __('Welcome to Laravel!') }}</p>
+                     <p>Using JSON: {{ __('Hello :name', ['name' => 'Piotr']) }}</p>
                 </div>
             </div>
         </div>
