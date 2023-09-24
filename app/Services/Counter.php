@@ -2,28 +2,35 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Cache\Factory as Cache;
+use Illuminate\Contracts\Session\Session;
+//we define dependency like contracts, interfaces in app
 
 class Counter
 {
-
-
     private $timeout;
+    private $cache;
+    private $session;
+    private $supportsTags;
 
-    public function __construct($timeout)
+    public function __construct(Cache $cache, Session $session, int $timeout)
     {
-          $this->timeout = $timeout;
+        $this->cache = $cache;
+        $this->timeout = $timeout;
+        $this->session = $session;
+        $this->supportsTags = method_exists($cache, 'tags');
     }
 
-public function increment(string $key, array $tags = null)
-{
+    public function increment(string $key, array $tags = null): int
+    {
+        $sessionId = $this->session->getId();
+        $counterKey = "{$key}-counter";
+        $usersKey = "{$key}-users";
 
-    $sessionId = session()->getId();
-    $counterKey = "{$key}-counter";
-    $usersKey = "{$key}-users";
+        $cache = $this->supportsTags && null !== $tags
+            ? $this->cache->tags($tags) : $this->cache;
 
-
-        $users = Cache::get($usersKey, []);
+        $users = $cache->get($usersKey, []);
         $usersUpdate = [];
         $diffrence = 0;
         $now = now();
@@ -44,17 +51,16 @@ public function increment(string $key, array $tags = null)
         }
 
         $usersUpdate[$sessionId] = $now;
-        Cache::forever($usersKey, $usersUpdate);
+        $cache->forever($usersKey, $usersUpdate);
 
-        if (!Cache::has($counterKey)) {
-            Cache::forever($counterKey, 1);
+        if (!$cache->has($counterKey)) {
+            $cache->forever($counterKey, 1);
         } else {
-            Cache::increment($counterKey, $diffrence);
+            $cache->increment($counterKey, $diffrence);
         }
 
-        $counter = Cache::get($counterKey);
+        $counter = $cache->get($counterKey);
 
-}
-
-
+        return $counter;
+    }
 }

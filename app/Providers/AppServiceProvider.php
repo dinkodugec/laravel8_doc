@@ -38,7 +38,12 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.comment-list', 'commentList');
 
          $this->app->singleton(Counter::class, function ($app) {           //$app will be always pass by laravel
-            return new Counter(env('COUNTER_TIMEOUT'));
+               return new Counter(
+                $app->make('Illuminate\Contracts\Cache\Factory'),
+                //$app->make is almost same like reslove function, this is ijnjection interfaces like contracts
+                $app->make('Illuminate\Contracts\Session\Session'),
+                env('COUNTER_TIMEOUT')
+            );
         });
 
          /*   $this->app->when(Counter::class)
