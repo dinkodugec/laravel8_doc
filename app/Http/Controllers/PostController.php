@@ -31,10 +31,13 @@ use Illuminate\Support\Facades\Redis;
 class PostController extends Controller
 {
 
-    public function __construct()
+    private $counter;
+
+    public function __construct(Counter $counter)
     {
         $this->middleware('auth')
             ->only(['create', 'store', 'edit', 'update', 'destroy']);
+            $this->counter = $counter;
     }
 
 
@@ -163,16 +166,12 @@ class PostController extends Controller
             ->findOrFail($id);
         });
 
-
-        $counter = resolve(Counter::class);
-
-
-
+   /*      dd($this->counter); */
 
         return view('posts.show', [
            /*  'post' => BlogPosts::with('comments')->with('tags')->with('tags')->findOrFail($id), //eager loading */
            'post' => $blogPost,
-           'counter' => $counter->increment("blog-post-{$id}", ['blog-post']),
+           'counter' => $this->counter->increment("blog-post-{$id}", ['blog-post']),
         ]);
     }
 
