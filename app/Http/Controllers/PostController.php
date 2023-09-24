@@ -164,7 +164,7 @@ class PostController extends Controller
         });
 
 
-        $counter = new Counter();
+        $counter = resolve(Counter::class);
 
 
 

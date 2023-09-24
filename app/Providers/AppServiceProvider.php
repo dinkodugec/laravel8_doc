@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Observers\BlogPostObserver;
 use App\Observers\CommentObserver;
+use App\Services\Counter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.comment-form', 'commentForm');
         Blade::component('components.comment-list', 'commentList');
 
-
+        $this->app->singleton(Counter::class, function ($app) {           //$app will be always pass by laravel
+            return new Counter(env('COUNTER_TIMEOUT'));
+        });
 
        BlogPosts::observe(BlogPostObserver::class);
         Comment::observe(CommentObserver::class);
