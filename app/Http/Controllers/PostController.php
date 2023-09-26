@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\BlogPosts;
 use App\Models\Image;
 use App\Models\User;
-use App\Services\Counter;
+use App\Contracts\CounterContract;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\RewindableGenerator;
@@ -33,7 +33,7 @@ class PostController extends Controller
 
     private $counter;
 
-    public function __construct(Counter $counter)
+    public function __construct(CounterContract $counter)
     {
         $this->middleware('auth')
             ->only(['create', 'store', 'edit', 'update', 'destroy']);

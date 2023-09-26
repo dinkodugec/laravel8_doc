@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Observers\BlogPostObserver;
 use App\Observers\CommentObserver;
 use App\Services\Counter;
+use App\Services\DummyCounter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -45,6 +46,13 @@ class AppServiceProvider extends ServiceProvider
                 env('COUNTER_TIMEOUT')
             );
         });
+
+
+        $this->app->bind(  //bind() tell laravel which interface is requested on Dependecy injection
+            'App\Contracts\CounterContract',
+            Counter::class
+          /*   DummyCounter::class */
+        );  /* if this interface is requested we use this implementention */
 
          /*   $this->app->when(Counter::class)
             ->needs('$timeout')

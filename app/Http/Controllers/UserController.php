@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUser;
 use App\Models\Image;
 use App\Models\User;
-use App\Services\Counter;
+use App\Contracts\CounterContract;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,7 +18,7 @@ class UserController extends Controller
 
      private $counter;
 
-     public function __construct(Counter $counter)
+     public function __construct(CounterContract $counter)
      {
          $this->middleware('auth');
          $this->authorizeResource(User::class, 'user');
